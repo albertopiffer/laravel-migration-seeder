@@ -8,14 +8,13 @@ use Illuminate\Http\Request;
 
 class TrainsController extends Controller
 {
+
     public function homepage()
     {
 
-        $trains = Train::where('orario_partenza', '>=', now())
-            ->whereDate('orario_partenza', '=', date('Y-m-d'))
-            ->get();
+        $trains = Train::all();
 
-        //dd($trains);
+        $trains = $trains->where('orario_partenza', '>', now());
 
         return view('welcome', ['trains' => $trains]);
     }
